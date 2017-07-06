@@ -2,8 +2,8 @@ import os
 
 import pytest
 
-from pyspotify.auth import OAuth
-from pyspotify.client import Client
+from spotify.auth import OAuth
+from spotify.client import Client
 
 CLIENT_ID = os.environ['SPOTAPI_CLIENT_ID']
 CLIENT_SECRET = os.environ['SPOTAPI_CLIENT_SECRET']
