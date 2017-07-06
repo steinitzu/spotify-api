@@ -17,6 +17,7 @@ class Client:
         class Api:
             pass
         self.api = Api()  # So endpoints module is not modified
+        self.api.request = self.request
 
         for name, member in endpoints.__dict__.items():
             if name.startswith('_'):
