@@ -1,5 +1,6 @@
-# pyspotify
-Spotify api client for python
+# spotify-api
+Python API client for the spotify web API.  
+[https://developer.spotify.com/web-api/](https://developer.spotify.com/web-api/)
 
 # Usage
 
