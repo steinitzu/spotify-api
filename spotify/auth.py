@@ -123,7 +123,7 @@ class OAuth:
         Raises HTTPError on any non 2xx response code
         """
         params = {
-            'refresh_token': self.token['refresh_token'],
+            'refresh_token': self._token['refresh_token'],
             'grant_type': 'refresh_token'
         }
         auth = HTTPBasicAuth(self.client_id, self.client_secret)
@@ -140,8 +140,8 @@ class OAuth:
 
         Raises HTTPError on failed token refresh
         """
-        if self.token['expires_at'] <= time.time() + expires_in:
-            if 'refresh_token' in self.token:
+        if self._token['expires_at'] <= time.time() + expires_in:
+            if 'refresh_token' in self._token:
                 self.refresh_token()
             else:
                 self.request_client_credentials()
