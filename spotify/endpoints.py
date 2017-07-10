@@ -99,15 +99,24 @@ def browse_category_playlists(id, country=None, limit=50, offset=0):
 
 
 def recommendations(seed_artists=None, seed_tracks=None, seed_genres=None, market=None, limit=100, **tuneables):
-    params = dict(
-        seed_artists=seed_artists,
-        seed_tracks=seed_tracks,
-        seed_genres=seed_genres,
-        market=market,
-        limit=limit
-    )
+    params = {'limit': limit}
+    if seed_artists:
+        params['seed_artists'] = ','.join(seed_artists)
+    if seed_tracks:
+        params['seed_tracks'] = ','.join(seed_tracks)
+    if seed_genres:
+        params['seed_genres'] = ','.join(seed_genres)
+    if market:
+        params['market'] = market
     params.update(tuneables)
     return 'GET', '/recommendations', params
+
+
+def me():
+    """
+    Current user's profile
+    """
+    return 'GET', '/me'
 
 
 def me_following(type='artist', limit=50, after=None):
@@ -223,7 +232,7 @@ def user_playlist_tracks(user_id, playlist_id, fields=None, limit=100, offset=0,
 
 def user_playlist_create(user_id, name, public=True, collaborative=False, description=None):
     return (
-        'POST', '/users/{}/playlists', {},
+        'POST', '/users/{}/playlists'.format(user_id), {},
         dict(name=name, public=public,
              collaborative=collaborative, description=description)
     )
