@@ -30,9 +30,9 @@ class OAuth:
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri
         if isinstance(scopes, str):
-            self.scopes = scopes.split(' ')
+            self.scopes = scopes
         else:
-            self.scopes = list(scopes)
+            self.scopes = ' '.join(scopes)
         self.state = None
         self._token = None
         self.auto_refresh = auto_refresh
@@ -53,11 +53,11 @@ class OAuth:
             response_type='code',
         )
         if self.scopes:
-            params['scopes'] = self.scopes
+            params['scope'] = self.scopes
         if self.state:
             params['state'] = self.state
         params = urlencode(params)
-        return '{}?{}'.format(self.base_url, params)
+        return '{}?{}'.format(self.AUTHORIZE_URL, params)
 
     @property
     def token(self):
@@ -81,18 +81,20 @@ class OAuth:
 
         Raises HTTPError on any non 2xx response code
         """
-        code = url_or_code if url_or_code.startswith('http') else self.parse_response_code(url_or_code)
+        if url_or_code.startswith('http'):
+            code = self.parse_response_code(url_or_code)
+        else:
+            code = url_or_code
 
         params = {
             'redirect_uri': self.redirect_uri,
             'code': code,
             'grant_type': 'authorization_code'
         }
-        if self.scope:
+        if self.scopes:
             params['scope'] = self.scopes
         if self.state:
             params['state'] = self.state
-        
         auth = HTTPBasicAuth(self.client_id, self.client_secret)
 
         response = self.session.post(self.TOKEN_URL, data=params, auth=auth, verify=True)
