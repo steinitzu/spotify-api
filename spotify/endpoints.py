@@ -16,7 +16,7 @@ def album(id, market=None):
     return 'GET', '/albums/{}'.format(id), {'market': market}
 
 
-def albums(*ids, market=None):
+def albums(ids, market=None):
     ids = ','.join(ids)
     return 'GET', '/albums', dict(ids=ids, market=market)
 
@@ -49,11 +49,11 @@ def track_audio_features(track_id):
     return 'GET', '/audio-features/{}'.format(track_id)
 
 
-def tracks(*ids, market=None):
+def tracks(ids, market=None):
     return 'GET', '/tracks', {'market': market, 'ids': ','.join(ids)}
 
 
-def tracks_audio_features(*track_ids):
+def tracks_audio_features(track_ids):
     return 'GET', '/audio-features', dict(ids=track_ids)
 
 
@@ -197,7 +197,6 @@ def me_top(type, limit=50, offset=0, time_range='medium_term'):
         'GET', '/me/top/{}'.format(type),
         dict(limit=limit, offset=offset, time_range=time_range)
     )
-
 
 def me_player_recently_played(limit=50, before=None, after=None):
     return (
