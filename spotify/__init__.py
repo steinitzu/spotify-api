@@ -1,5 +1,5 @@
 from .client import Client
 from .auth import OAuth
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
