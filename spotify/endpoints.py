@@ -31,7 +31,7 @@ def artist(id):
 
 def artists(ids):
     ids = ','.join(ids)
-    return 'GET', '/artists/{}'.format(ids),
+    return 'GET', '/artists', {'ids': ids}
 
 
 def artist_albums(id, album_type=None, market=None, limit=50, offset=0):
