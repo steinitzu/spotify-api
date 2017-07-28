@@ -42,4 +42,6 @@ class Client:
             method, url, params=params, json=payload, headers=headers
         )
         response.raise_for_status()
+        if not response.text:
+            return
         return response.json()
