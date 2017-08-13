@@ -265,7 +265,10 @@ def user_playlist_tracks_remove_specific_occurences(user_id, playlist_id, tracks
     return (
         'DELETE', '/users/{}/playlists/{}/tracks'.format(user_id, playlist_id), {}, payload
     )
-    
+
+
+def me_player_devices(market=None):
+    return 'GET', '/me/player/devices'
 
 def search(q, type, limit=50, offset=0, market=None):
     return 'GET', '/search', dict(q=q, type=type, limit=limit, offset=offset, market=market)
