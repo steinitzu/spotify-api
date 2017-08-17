@@ -54,7 +54,7 @@ def tracks(ids, market=None):
 
 
 def tracks_audio_features(track_ids):
-    return 'GET', '/audio-features', dict(ids=track_ids)
+    return 'GET', '/audio-features', dict(ids=','.join(track_ids))
 
 
 def artist_top_tracks(id, country):
