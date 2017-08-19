@@ -267,7 +267,7 @@ def user_playlist_tracks_remove_specific_occurences(user_id, playlist_id, tracks
     )
 
 
-def me_player_devices(market=None):
+def me_player_devices():
     return 'GET', '/me/player/devices'
 
 def search(q, type, limit=50, offset=0, market=None):
