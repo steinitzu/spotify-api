@@ -33,7 +33,7 @@ class OAuth:
             self.scopes = scopes
         else:
             self.scopes = ' '.join(scopes)
-        self.state = None
+        self.state = state
         self._token = None
         self.auto_refresh = auto_refresh
 
