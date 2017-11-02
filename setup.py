@@ -12,7 +12,7 @@ with open(os.path.join(thisdir, 'requirements.txt')) as f:
 
 setup(
     name='spotify-api',
-    version='0.0.6',
+    version='0.0.7',
     description='Python client for the Spotify web API',
     author='Steinthor Palsson',
     author_email='steini90@gmail.com',
