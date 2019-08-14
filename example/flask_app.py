@@ -32,7 +32,7 @@ def the_app():
     ])
 
 
-# For testing the new endpoint, might remove later
+# For custom playlist cover endpoint
 @app.route('/playlist')
 def playlist():
     token = session.get('spotify_token')
@@ -43,7 +43,11 @@ def playlist():
     with open("1.jpg", "rb") as f:
         image = base64.b64encode(f.read())  # encode the image to base64
 
-    return client.api.user_playlist_custom_cover("2vfGKaDXBH7ZSmGVXVeI5o", image)
+    try:
+        client.api.user_playlist_custom_cover("2vfGKaDXBH7ZSmGVXVeI5o", image)
+        return {'status': 'success'}
+    except Exception as e:
+        return {'error': str(e)}
 
 
 @app.route('/authorize')

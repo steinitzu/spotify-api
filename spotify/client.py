@@ -31,7 +31,7 @@ class Client:
         def wrapper(*args, **kwargs):
             return self.request(**func(*args, **kwargs))
         return wrapper
-            
+
     def headers(self):
         return {'Authorization': 'Bearer '+self.auth.token['access_token']}
 
@@ -47,6 +47,5 @@ class Client:
         )
         response.raise_for_status()
         if not response.text:
-            # Return the status_code if response body is empty
-            return {'status_code': response.status_code}
+            return
         return response.json()
