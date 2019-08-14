@@ -267,6 +267,20 @@ def user_playlist_tracks_remove_specific_occurences(user_id, playlist_id, tracks
     )
 
 
+def user_playlist_custom_cover(playlist_id, encodedImage):
+    """
+    Replace the image used to represent a specific playlist.
+
+    @param playlist_id: The Spotify ID for the playlist.
+    @param encodedImage: base64 encoded Image to use as new playlist cover.
+    @retun: tuple. method: PUT, endpoint, params and playload blank,
+        data: encodedImage, additional_header: content-type
+    """
+    additional_headers = {'Content-Type': 'image/jpeg'}
+    return ('PUT', '/playlists/{}/images'.format(playlist_id), {}, {},
+            encodedImage, additional_headers)
+
+
 def me_player_devices():
     return 'GET', '/me/player/devices'
 
@@ -324,7 +338,7 @@ def _clear_none_params(function, *args, **kwargs):
 def _tuple_to_dict(function, *args, **kwargs):
     rtuple = function(*args, **kwargs)
     result = {}
-    keys = ('method', 'url', 'params', 'payload')
+    keys = ('method', 'url', 'params', 'payload', 'data', 'additional_headers')
     for i, value in enumerate(rtuple):
         result[keys[i]] = value
     return result
