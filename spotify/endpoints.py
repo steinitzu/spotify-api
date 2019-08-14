@@ -273,8 +273,8 @@ def user_playlist_custom_cover(playlist_id, encodedImage):
 
     @param playlist_id: The Spotify ID for the playlist.
     @param encodedImage: base64 encoded Image to use as new playlist cover.
-    @retun: tuple. method: PUT, endpoint, params and playload blank,
-        data: encodedImage, additional_header: content-type
+    @retun: tuple. (method, endpoint, params, playload, data: encodedImage,
+        additional_headers: content-type, )
     """
     additional_headers = {'Content-Type': 'image/jpeg'}
     return ('PUT', '/playlists/{}/images'.format(playlist_id), {}, {},
