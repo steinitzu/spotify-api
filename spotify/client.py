@@ -31,15 +31,19 @@ class Client:
         def wrapper(*args, **kwargs):
             return self.request(**func(*args, **kwargs))
         return wrapper
-            
+
     def headers(self):
         return {'Authorization': 'Bearer '+self.auth.token['access_token']}
 
-    def request(self, method, url, params=None, payload=None):
+    def request(self, method, url, params=None, payload=None, data=None,
+                additional_headers=None):
+        if additional_headers is None:
+            additional_headers = {}
+
         url = url if url.startswith('http') else self.prefix+url
-        headers = self.headers()
+        headers = {**self.headers(), **additional_headers}
         response = self.session.request(
-            method, url, params=params, json=payload, headers=headers
+            method, url, params=params, json=payload, headers=headers, data=data
         )
         response.raise_for_status()
         if not response.text:
